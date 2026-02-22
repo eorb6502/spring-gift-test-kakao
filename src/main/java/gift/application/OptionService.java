@@ -28,4 +28,8 @@ public class OptionService {
     public List<Option> retrieve() {
         return optionRepository.findAll();
     }
+
+    public Option retrieveById(final Long id) {
+        return optionRepository.findById(id).orElseThrow();
+    }
 }

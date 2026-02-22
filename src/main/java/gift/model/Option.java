@@ -33,7 +33,7 @@ public class Option {
 
     public void decrease(final int quantity) {
         if (this.quantity < quantity) {
-            throw new IllegalStateException();
+            throw new IllegalStateException("재고가 부족합니다. 현재 수량: " + this.quantity);
         }
         this.quantity -= quantity;
     }
