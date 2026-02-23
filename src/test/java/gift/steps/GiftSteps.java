@@ -116,6 +116,34 @@ public class GiftSteps {
         assertThat(actualReceiverId).isEqualTo(expectedReceiver.getId());
     }
 
+    @만약("사용자 {string}이 옵션 {string}를 {int}개 선택하여 존재하지 않는 수신자에게 {string} 메시지로 선물을 보낸다")
+    public void 존재하지_않는_수신자에게_선물_보내기(String 사용자명, String 옵션명, int 수량, String 메시지) {
+        Member sender = context.getMember(사용자명);
+        Long optionId = context.getOptionId(옵션명);
+
+        ExtractableResponse<Response> response = RestAssured.given()
+            .contentType(ContentType.JSON)
+            .header("Member-Id", sender.getId())
+            .body(Map.of(
+                "optionId", optionId,
+                "quantity", 수량,
+                "receiverId", 999999L,
+                "message", 메시지
+            ))
+            .when()
+            .post("/api/gifts")
+            .then()
+            .extract();
+
+        context.setLastResponse(response);
+    }
+
+    @그러면("선물 요청이 NOT_FOUND로 실패한다")
+    public void 요청_NOT_FOUND_실패_확인() {
+        assertThat(context.getLastResponse().statusCode())
+            .isEqualTo(HttpStatus.NOT_FOUND.value());
+    }
+
     @그리고("발송된 선물의 메시지는 {string}이다")
     public void 선물_메시지_확인(String 예상메시지) {
         Long giftId = context.getLastGiftId();
