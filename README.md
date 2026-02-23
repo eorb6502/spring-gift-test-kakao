@@ -58,3 +58,11 @@
 - `GET /api/options/{id}`: 옵션 재고 수량 확인용.
 - `GET /api/gifts/{id}`: 선물 발송 내역 확인용.
 3. **DatabaseCleaner**: 테스트 격리를 위한 TRUNCATE 유틸리티.
+
+---
+
+## 6. Step 2 - Cucumber BDD 적용
+
+Step 2 요구사항 1에서 기존 RestAssured 기반 인수 테스트를 Cucumber BDD 형식으로 전환했습니다.
+
+변경 사항 및 학습 내용은 [CUCUMBER_COMPARISON.md](CUCUMBER_COMPARISON.md)를 참고해주세요.
