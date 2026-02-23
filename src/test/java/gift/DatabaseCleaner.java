@@ -6,13 +6,15 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Table;
 import jakarta.persistence.metamodel.EntityType;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
-public class DatabaseCleaner {
+@Profile("!cucumber")
+public class DatabaseCleaner implements DatabaseCleanerStrategy {
 	@PersistenceContext
 	private EntityManager entityManager;
 

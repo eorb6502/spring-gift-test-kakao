@@ -66,3 +66,23 @@
 Step 2 요구사항 1에서 기존 RestAssured 기반 인수 테스트를 Cucumber BDD 형식으로 전환했습니다.
 
 변경 사항 및 학습 내용은 [CUCUMBER_COMPARISON.md](CUCUMBER_COMPARISON.md)를 참고해주세요.
+
+---
+
+## 7. Step 2 - PostgreSQL + Docker Compose 통합
+
+Step 2 요구사항 2에서 프로덕션 환경과 동일한 PostgreSQL로 Cucumber 테스트를 실행할 수 있도록 Docker Compose 통합을 추가했습니다.
+
+### 실행 방법
+
+```bash
+# H2 인메모리 테스트 (기존 방식, Docker 불필요)
+./gradlew test
+
+# PostgreSQL Cucumber 테스트 (Docker 자동 관리)
+./gradlew cucumberTest
+```
+
+`cucumberTest`는 Docker Compose로 PostgreSQL을 자동으로 시작하고, 테스트 완료 후 자동으로 종료합니다.
+
+변경 사항 및 H2 vs PostgreSQL 비교는 [POSTGRESQL_COMPARISON.md](POSTGRESQL_COMPARISON.md)를 참고해주세요.
