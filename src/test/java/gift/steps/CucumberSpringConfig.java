@@ -1,6 +1,6 @@
 package gift.steps;
 
-import gift.DatabaseCleanerStrategy;
+import gift.DatabaseCleaner;
 import io.cucumber.spring.CucumberContextConfiguration;
 import io.restassured.RestAssured;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ public class CucumberSpringConfig {
     int port;
 
     @Autowired
-    DatabaseCleanerStrategy databaseCleaner;
+    DatabaseCleaner databaseCleaner;
 
     @io.cucumber.java.Before
     public void setUp() {
