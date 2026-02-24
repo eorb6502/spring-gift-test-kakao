@@ -12,3 +12,23 @@ services:
       interval: 3s
       timeout: 3s
       retries: 10
+
+  app:
+    build: .
+    profiles: ["app"]
+    ports:
+      - "28080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/gift_test
+      SPRING_DATASOURCE_USERNAME: gift
+      SPRING_DATASOURCE_PASSWORD: gift
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/categories"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 30s

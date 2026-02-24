@@ -1,4 +1,4 @@
-package gift.steps;
+package gift.config;
 
 import gift.DatabaseCleaner;
 import io.cucumber.spring.CucumberContextConfiguration;

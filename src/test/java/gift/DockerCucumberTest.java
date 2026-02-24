@@ -11,7 +11,7 @@ import static io.cucumber.core.options.Constants.PLUGIN_PROPERTY_NAME;
 @Suite
 @IncludeEngines("cucumber")
 @SelectClasspathResource("features")
-@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "gift.config,gift.steps")
+@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "gift.docker,gift.steps")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty, summary")
-public class CucumberTest {
+public class DockerCucumberTest {
 }

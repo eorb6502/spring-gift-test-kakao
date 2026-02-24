@@ -86,3 +86,30 @@ Step 2 요구사항 2에서 프로덕션 환경과 동일한 PostgreSQL로 Cucum
 `cucumberTest`는 Docker Compose로 PostgreSQL을 자동으로 시작하고, 테스트 완료 후 자동으로 종료합니다.
 
 변경 사항 및 H2 vs PostgreSQL 비교는 [POSTGRESQL_COMPARISON.md](POSTGRESQL_COMPARISON.md)를 참고해주세요.
+
+---
+
+## 8. Step 2 - Application 컨테이너화 (Docker E2E)
+
+Step 2 요구사항 3에서 Spring Boot 애플리케이션까지 Docker 컨테이너로 실행하여 프로덕션과 동일한 환경에서 E2E 테스트를 수행할 수 있도록 했습니다.
+
+### 실행 방법
+
+```bash
+# 1. Docker 이미지 빌드
+./gradlew dockerBuild
+
+# 2. 전체 스택 시작 (app + postgres)
+./gradlew dockerUp
+
+# 3. 앱 응답 확인
+curl http://localhost:28080/api/categories
+
+# 4. Docker 환경에서 Cucumber 테스트 실행
+./gradlew cucumberTest
+
+# 5. 전체 스택 종료
+./gradlew dockerDown
+```
+
+구현 과정 및 설계 결정은 [DOCKER_IMPLEMENTATION.md](DOCKER_IMPLEMENTATION.md)를 참고해주세요.

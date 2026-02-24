@@ -44,4 +44,27 @@ tasks.named('test') {
 	useJUnitPlatform()
 	dependsOn dockerComposeUp
 	finalizedBy dockerComposeDown
+	exclude '**/DockerCucumberTest.class'
+}
+
+// Docker application tasks
+tasks.register('dockerBuild', Exec) {
+	description = 'Build Docker image for the application'
+	commandLine 'docker', 'compose', 'build', 'app'
+}
+
+tasks.register('dockerUp', Exec) {
+	description = 'Start full stack (app + postgres) with Docker Compose'
+	commandLine 'docker', 'compose', '--profile', 'app', 'up', '-d', '--wait'
+}
+
+tasks.register('dockerDown', Exec) {
+	description = 'Stop full stack (app + postgres) with Docker Compose'
+	commandLine 'docker', 'compose', '--profile', 'app', 'down'
+}
+
+tasks.register('cucumberTest', Test) {
+	description = 'Run Cucumber tests against Docker containers'
+	useJUnitPlatform()
+	include '**/DockerCucumberTest.class'
 }
